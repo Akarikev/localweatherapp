@@ -21,7 +21,6 @@ function Api() {
       const response = await fetch(url);
       const result = await response.json();
       setWeather(result);
-      console.log(result);
     } catch (error) {
       console.error(error);
     }
