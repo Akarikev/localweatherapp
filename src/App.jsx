@@ -7,7 +7,9 @@ import { TiWeatherWindyCloudy } from "react-icons/ti";
 function App() {
   return (
     <div>
-      <h1>CAPEWEATHER</h1>
+      <h1>
+        <span>CAPE</span>WEATHER
+      </h1>
       <TiWeatherWindyCloudy
         size={60}
         style={{ marginTop: -30, marginBottom: 10 }}
