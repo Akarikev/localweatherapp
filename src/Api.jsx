@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
-import React, { useEffect, useState } from "react";
-import useGeolocation from "./useGeolocation";
+import { useEffect, useState } from "react";
+
 import { WiDaySunny } from "react-icons/wi";
 import { MdOutlineNightlight } from "react-icons/md";
 import useTimeAndDate from "./useTimeAndDate";
