@@ -1,9 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useEffect, useState } from "react";
-
 import { WiDaySunny } from "react-icons/wi";
 import { MdOutlineNightlight } from "react-icons/md";
 import useTimeAndDate from "./useTimeAndDate";
+
 function Api() {
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -21,10 +21,21 @@ function Api() {
       const response = await fetch(url);
       const result = await response.json();
       setWeather(result);
-
       console.log(result);
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  const getTemperatureDescription = (temperature) => {
+    if (temperature <= 10) {
+      return `It's very cold (${temperature}°C)`;
+    } else if (temperature <= 20) {
+      return `It's cold (${temperature}°C)`;
+    } else if (temperature <= 30) {
+      return `It's warm (${temperature}°C)`;
+    } else {
+      return `It's hot (${temperature}°C)`;
     }
   };
 
@@ -34,26 +45,21 @@ function Api() {
         <div>Loading weather data...</div>
       ) : weather ? (
         <div>
-          <>Place/TimeZone : {weather.timezone}</>
-
+          <>Place/TimeZone: {weather.timezone}</>
           {weather.current_weather.is_day === 0 ? (
             <>
-              <p>{`It's Night Time`}</p>
+              <p>It's Night Time</p>
               <MdOutlineNightlight size={45} />
             </>
           ) : (
-            <WiDaySunny />
+            <>
+              <p>It's Day Time</p>
+              <WiDaySunny size={45} />
+            </>
           )}
-          {weather.current_weather.temperature <= 10 ? (
-            <p>It's very cold ({weather.current_weather.temperature}°C)</p>
-          ) : weather.current_weather.temperature <= 20 ? (
-            <p>It's cold ({weather.current_weather.temperature}°C)</p>
-          ) : weather.current_weather.temperature <= 30 ? (
-            <p>It's warm ({weather.current_weather.temperature}°C)</p>
-          ) : (
-            <p>It's hot ({weather.current_weather.temperature}°C)</p>
-          )}
-
+          <p>
+            {getTemperatureDescription(weather.current_weather.temperature)}
+          </p>
           <>Time & Date: {currentDateTime}</>
         </div>
       ) : (
